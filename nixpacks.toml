@@ -10,7 +10,8 @@ cmds = [
 
 [phases.build]
 cmds = [
-    'php artisan storage:link || true'
+    'php artisan storage:link || true',
+    'php artisan migrate --force || true'
 ]
 
 [start]
