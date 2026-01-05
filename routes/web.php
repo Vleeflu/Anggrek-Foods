@@ -7,7 +7,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PortfolioController;
 
 use App\Http\Controllers\SaleController;
+use Illuminate\Support\Facades\Artisan;
 // ...existing code...
+
+// Temporary migration endpoint (remove after tables exist)
+Route::get('/migrate-db', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migrations done: ' . Artisan::output();
+});
 
 Route::get('/', [MenuController::class, 'index'])->name('home');
 Route::get('/menu/{category:slug}', [MenuController::class, 'show'])->name('menu.show');
