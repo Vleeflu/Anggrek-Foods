@@ -10,11 +10,15 @@ use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Artisan;
 // ...existing code...
 
-// Temporary migration route - DELETE AFTER RUNNING ONCE
+// Temporary migration route - bypass middleware
 Route::get('/migrate-db', function() {
-    Artisan::call('migrate', ['--force' => true]);
-    return 'Database migrated successfully!';
-});
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return 'Database migrated successfully! Migrations output: ' . Artisan::output();
+    } catch (\Exception $e) {
+        return 'Migration error: ' . $e->getMessage();
+    }
+})->withoutMiddleware(\Illuminate\Session\Middleware\StartSession::class);
 
 Route::get('/', [MenuController::class, 'index'])->name('home');
 Route::get('/menu/{category:slug}', [MenuController::class, 'show'])->name('menu.show');
