@@ -7,21 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PortfolioController;
 
 use App\Http\Controllers\SaleController;
-use Illuminate\Support\Facades\Artisan;
 // ...existing code...
-
-// Temporary migration route
-Route::get('/migrate-db', function() {
-    try {
-        // Set session to file temporarily
-        config(['session.driver' => 'file']);
-        
-        Artisan::call('migrate', ['--force' => true]);
-        return response('Database migrated successfully!' . "\n" . Artisan::output(), 200);
-    } catch (\Exception $e) {
-        return response('Migration error: ' . $e->getMessage(), 500);
-    }
-});
 
 Route::get('/', [MenuController::class, 'index'])->name('home');
 Route::get('/menu/{category:slug}', [MenuController::class, 'show'])->name('menu.show');
