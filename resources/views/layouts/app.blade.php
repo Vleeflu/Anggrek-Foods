@@ -5,27 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Anggrek Foods') }}</title>
     <link rel="icon" type="image/png" href="{{ asset('Logo.png') }}">
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @else
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            brand: {
-                                DEFAULT: '#f59e0b',
-                                light: '#fbbf24',
-                                softer: '#fef3c7',
-                                dark: '#b45309'
-                            }
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#f59e0b',
+                            light: '#fbbf24',
+                            softer: '#fef3c7',
+                            dark: '#b45309'
                         }
                     }
                 }
-            };
-        </script>
-    @endif
+            }
+        };
+    </script>
 </head>
 <body class="min-h-screen bg-amber-50 text-gray-900 flex flex-col">
     <header class="text-gray-900 shadow-lg" style="background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);">
