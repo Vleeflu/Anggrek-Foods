@@ -7,7 +7,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PortfolioController;
 
 use App\Http\Controllers\SaleController;
+use Illuminate\Support\Facades\Artisan;
 // ...existing code...
+
+// Temporary setup route (run once, then remove)
+Route::get('/setup-db', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    Artisan::call('db:seed', ['--force' => true]);
+    return response("Done:\n" . Artisan::output(), 200, ['Content-Type' => 'text/plain']);
+});
 
 Route::get('/', [MenuController::class, 'index'])->name('home');
 Route::get('/menu/{category:slug}', [MenuController::class, 'show'])->name('menu.show');
